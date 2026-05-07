@@ -74,6 +74,15 @@ Every lean consensus client shipping runs through this testing framework, which 
 
 This project would extend the testing infrastructure: adding new scenarios (spec tests, checkpoint tests, signature aggregation interop, state transition cross-checks, key lifecycle edge cases), onboarding new client implementations if required, and improving the framework itself which involves adding fixtures, runtime errors, handling test failures, and maintaining dashboards that show the state of the clients' performance in the tests.
 
+### Ream: Operating and Scaling PQ Interop Devnets
+
+By Shariq Naiyer and Unnawut
+
+The Ream team wants to operate and scale the post quantum interop devnets, which involves deploying post quantum clients (lean consensus clients) in realistic configurations, running them under load, and observing how they behave together, reporting findings, surfacing bugs from these runs and fixing them.
+
+Tooling to play around be found at https://github.com/ReamLabs/leanstart 🦀.
+
+
 ### Ream: Execution Layer Integration for the Lean Chain
 
 By Kolby ML and Shariq Naiyer
@@ -83,3 +92,12 @@ The Post Quantum spec is currently consensus-only. Ream's blocks carry only atte
 What made Ethereum different from what came before was that, for the first time, people could write programs backed by the same fundamental principles as Bitcoin. We think it would be cool to show that the same is true under PoC post-quantum testnet where users can send transactions and deploy smart contracts on a chain finalized in seconds, backend by post quantum security in Rust 🦀.
 
 This project involves embedding reth (https://github.com/paradigmxyz/reth) directly into the Ream (https://github.com/ReamLabs/ream) binary as a library and driving it from inside the lean stack via reth's Execution Extensions (ExEx) framework. One process, no HTTP bridge between an Execution and Consensus. The success bar is a working "wallet → tx → block → confirmation" demo on a local lean devnet running as a single `ream lean_node` binary with reth embedded.
+
+### Ream: Minimal PeerDAS Data Availability Client
+
+By Shariq Naiyer and Kolby ML
+
+Data Availability is the guarantee that the data behind a transaction has been published somewhere any node can fetch and verify it. Currently there are only execution and consensus clients and DA is often bundled with a consensus client. We want to build a dedicated DA client that can plug into a minimal beacon client and a generic interface so it could plug into a post quantum consensus client in Rust 🦀.
+
+This project builds a standalone `ream da-node` binary fully dedicated to the data layer: a Data layer client that custodies and serves the full 128 columns, and does the minimal amount of non-DAS work possible. No fork choice, no execution, no validator, just the data layer, decoupled from any one consensus runtime and runnable alongside a minimal consensus node.
+
